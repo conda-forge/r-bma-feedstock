@@ -1,4 +1,4 @@
-{% set version = '3.18.7' %}
+{% set version = "3.18.8" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,7 +12,7 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/BMA_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/BMA/BMA_{{ version }}.tar.gz
-  sha256: bf18170fa45577a27355967cf440b12c41795ed6804759eebce1d12917e5b124
+  sha256: 05c6e0613cb859b7d237b3a2433ca901b1cef0fe66f704db1fabfa132c7c62a8
 
 build:
   number: 0
