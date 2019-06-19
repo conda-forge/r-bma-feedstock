@@ -1,5 +1,4 @@
-{% set version = "3.18.8" %}
-
+{% set version = '3.18.9' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,28 +7,29 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: BMA_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/BMA_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/BMA/BMA_{{ version }}.tar.gz
-  sha256: 05c6e0613cb859b7d237b3a2433ca901b1cef0fe66f704db1fabfa132c7c62a8
+    - {{ cran_mirror }}/src/contrib/BMA_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/BMA/BMA_{{ version }}.tar.gz
+  sha256: 5eeed976154f8ef12e3effc13daa69e2cf772fa3c1e4bbaeecdfc728b9968fd3
 
 build:
   merge_build_host: True  # [win]
-  number: 1002
-  skip: true  # [win32]
-
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('fortran') }}        # [unix]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('fortran') }}        # [not win]
     - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
   host:
     - r-base
     - r-inline
@@ -37,9 +37,9 @@ requirements:
     - r-robustbase
     - r-rrcov
     - r-survival
-
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
     - r-inline
     - r-leaps
     - r-robustbase
@@ -48,19 +48,34 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('BMA')"  # [not win]
+    - $R -e "library('BMA')"           # [not win]
     - "\"%R%\" -e \"library('BMA')\""  # [win]
 
 about:
-  home: http://www.research.att.com/~volinsky/bma.html
+  home: http://stats.research.att.com/volinsky/bma.html
   license: GPL (>= 2)
   summary: Package for Bayesian model averaging and variable selection for linear models, generalized
     linear models and survival models (cox regression).
   license_family: GPL3
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
 
 extra:
   recipe-maintainers:
-    - dpryan79
-    - johanneskoester
-    - bgruening
-    - daler
+    - conda-forge/r
+
+# Package: BMA
+# Version: 3.18.9
+# Date: 2018-09-07
+# Title: Bayesian Model Averaging
+# Author: Adrian Raftery <raftery@uw.edu>, Jennifer Hoeting, Chris Volinsky, Ian Painter, Ka Yee Yeung
+# Maintainer: Hana Sevcikova <hanas@uw.edu>
+# Description: Package for Bayesian model averaging and variable selection for linear models, generalized linear models and survival models (cox regression).
+# Depends: survival, leaps, robustbase, inline, rrcov
+# Imports: methods
+# Suggests: MASS
+# License: GPL (>= 2)
+# URL: http://stats.research.att.com/volinsky/bma.html
+# NeedsCompilation: yes
+# Packaged: 2018-09-07 19:03:17 UTC; hana
+# Repository: CRAN
+# Date/Publication: 2018-09-14 07:50:13 UTC
