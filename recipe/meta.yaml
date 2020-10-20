@@ -53,10 +53,11 @@ test:
 
 about:
   home: http://stats.research.att.com/volinsky/bma.html
-  license: GPL (>= 2)
+  license: GPL-2.0-or-later
   summary: Package for Bayesian model averaging and variable selection for linear models, generalized linear models and survival models (cox regression).
   license_family: GPL3
-  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
 
 extra:
   recipe-maintainers:
