@@ -3,7 +3,7 @@ About r-bma
 
 Home: http://stats.research.att.com/volinsky/bma.html
 
-Package license: GPL (>= 2)
+Package license: GPL-2.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-bma-feedstock/blob/master/LICENSE.txt)
 
