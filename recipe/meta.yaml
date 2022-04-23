@@ -1,4 +1,4 @@
-{% set version = "3.18.15" %}
+{% set version = "3.18.17" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/BMA_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/BMA/BMA_{{ version }}.tar.gz
-  sha256: 4be0d52f433503631e9574944067f613bafba129ebe27396bcfccb3b95992b1a
+  sha256: 6d8c514fa179f8a48c2105b551a8a08e28ea4375d06150a4b8ab4ccda577daf5
 
 build:
   merge_build_host: true  # [win]
