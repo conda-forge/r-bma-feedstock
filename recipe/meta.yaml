@@ -1,4 +1,4 @@
-{% set version = "3.18.17" %}
+{% set version = "3.18.19" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,10 +9,10 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/BMA_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/BMA/BMA_{{ version }}.tar.gz
-  sha256: 6d8c514fa179f8a48c2105b551a8a08e28ea4375d06150a4b8ab4ccda577daf5
+  sha256: 09ead6ec3dc0bcc1de4d47b18b705fd2a7637cd888eec220cbc5b175e8ca8d42
 
 build:
-  number: 3
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
